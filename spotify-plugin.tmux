@@ -2,13 +2,14 @@
 
 plugin_path="$(tmux show-env -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)"
 
-interpolation="\#{spotify_status}"
-
 update_tmux_option() {
-    local value=run-shell "python3 ${CURRENT_DIR}/plug.py"
-    local string=${$interpolation/$value}
     local option="$1"
+    local string="$(tmux show-option -gqv "$option")"
+    local value="$(python3 ${plugin_path}tmux-spotify/plug.py)"
+    local interpolation="\#{spotify_status_b}"
+    local string=${string/$interpolation/$value}
     tmux set-option -gq "$option" "$string"
+    echo "$string"
 }
 
 main() {

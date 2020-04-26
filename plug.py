@@ -1,7 +1,6 @@
 '''This is heart of the plugin'''
 
-from spotify import ALBUM, ARTIST, SONG, PLAYBACKSTATUS
-from tmux import MAX_LEN_STATUS, RE_STATUS
+from communicator import MAX_LEN_STATUS, RE_STATUS, ALBUM, ARTIST, SONG, PLAYBACKSTATUS
 
 
 def create_status():
@@ -18,5 +17,5 @@ def make_short_status(new_status):
     return new_status[:MAX_LEN_STATUS - 5] + '(...)' if len(new_status) > MAX_LEN_STATUS else new_status
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
     print(create_status())
